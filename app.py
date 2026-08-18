@@ -1007,7 +1007,6 @@ if(canHover && !prefersReducedMotion){
 }
 
 /* ---- parallax + cursor glow + sparkle trail (fine-pointer devices only) ---- */
-const canHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 if(canHover){
  const cursorGlow=document.getElementById('cursorGlow');
  const galaxyEls=[document.querySelector('.galaxy-cloud'),document.querySelector('.galaxy-core'),document.querySelector('.galaxy-dust')];
