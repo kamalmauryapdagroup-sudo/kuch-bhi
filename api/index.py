@@ -412,6 +412,14 @@ input,textarea{font-size:16px}
  content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,200,220,.15),transparent 60%);
  filter:blur(40px);pointer-events:none;animation:finalGlow 6s ease-in-out infinite;
 }
+.heart-fireworks{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.heart-firework{position:absolute;color:#ffdce9;font-family:Arial,sans-serif;font-size:var(--heart-size);line-height:1;text-shadow:0 0 8px #fff,0 0 22px rgba(255,142,190,.9);opacity:0;animation:heartFirework var(--heart-duration) ease-out forwards}
+@keyframes heartFirework{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.15) rotate(-12deg)}
+ 18%{opacity:.95}
+ 62%{opacity:.75;transform:translate(calc(-50% + var(--heart-drift)),calc(-50% - 14px)) scale(1.08) rotate(8deg)}
+ 100%{opacity:0;transform:translate(calc(-50% + var(--heart-drift)),calc(-50% - 72px)) scale(.7) rotate(-8deg)}
+}
 @keyframes finalGlow{
  0%,100%{opacity:.4;transform:scale(1)}
  50%{opacity:.7;transform:scale(1.1)}
@@ -837,6 +845,7 @@ input,textarea{font-size:16px}
 </section>
 
 <section class="page" id="p11">
+<div class="heart-fireworks" id="heartFireworks" aria-hidden="true"></div>
 <div class="content center final-card">
  <div class="eyebrow">11 • THE FINAL CHAPTER</div>
  <div class="script">Happy Birthday,</div>
@@ -890,7 +899,8 @@ function go(n){
  current=n;
  next.scrollTop=0;
  setTimeout(()=>{old.classList.remove('active','leaving');locked=false},1050);
- if(n===FINAL_PAGE)burst(80);
+ if(old.id==='p11')stopHeartFireworks();
+ if(next.id==='p11'){burst(80);startHeartFireworks();}
 }
 
 function answer(btn,msg){
@@ -1072,6 +1082,32 @@ function fireworks(bursts=3){
    chime(700+Math.random()*300);
   },i*450);
  }
+}
+
+let heartFireworkTimer=null;
+function makeHeartFirework(){
+ const layer=document.getElementById('heartFireworks');
+ if(!layer)return;
+ const heart=document.createElement('span');
+ heart.className='heart-firework';
+ heart.textContent='♡';
+ heart.style.left=(8+Math.random()*84)+'%';
+ heart.style.top=(8+Math.random()*78)+'%';
+ heart.style.setProperty('--heart-size',(18+Math.random()*30)+'px');
+ heart.style.setProperty('--heart-duration',(2.8+Math.random()*2.5)+'s');
+ heart.style.setProperty('--heart-drift',(-35+Math.random()*70)+'px');
+ layer.appendChild(heart);
+ setTimeout(()=>heart.remove(),5600);
+}
+function startHeartFireworks(){
+ stopHeartFireworks();
+ for(let i=0;i<12;i++)setTimeout(makeHeartFirework,i*130);
+ heartFireworkTimer=setInterval(makeHeartFirework,360);
+}
+function stopHeartFireworks(){
+ if(heartFireworkTimer){clearInterval(heartFireworkTimer);heartFireworkTimer=null;}
+ const layer=document.getElementById('heartFireworks');
+ if(layer)layer.replaceChildren();
 }
 
 /* ---- typewriter on hero ---- */
