@@ -834,6 +834,7 @@ input,textarea{font-size:16px}
  <div class="wish-reveal" id="wishReveal">
   <p class="quote-small" style="max-width:600px;margin:0 auto">Whatever you wished for — I hope it finds its way to you this year. And if it doesn't come on its own, I hope you go and build it yourself. You're good at building things.</p>
  </div>
+ <div class="center" style="margin-top:35px"><button class="btn" onclick="go(10)">Last page →</button></div>
  </div>
 </section>
 <section class="page" id="p11">
