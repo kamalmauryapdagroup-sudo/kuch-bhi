@@ -761,22 +761,6 @@ input,textarea{font-size:16px}
 </div>
 </section>
 
-<section class="page" id="p7">
-<div class="content">
- <div class="architecture">
-  <div class="eyebrow">07 • THE ARCHITECT</div>
-  <div class="display">You design spaces.<br><em>But...</em></div>
-  <p class="quote-small" style="max-width:700px">I think the nicest thing you build isn't made of concrete, glass or drawings.</p>
-  <div class="blueprint"></div>
-  <div style="max-width:700px;margin:25px auto 0">
-   <p class="body">You build feelings too — the comfort in a late-night conversation, the laughter in a random story, and that strange little feeling that people can simply be themselves around you.</p>
-   <p class="quote-small">Maybe architecture is about creating places people want to stay. In your own way, you do that with people too.</p>
-  </div>
-  <div class="center"><button class="btn primary" onclick="go(8)">A few reasons why →</button></div>
- </div>
-</div>
-</section>
-
 <section class="page" id="p8">
 <div class="content">
  <div class="eyebrow center">08 • A FEW REASONS</div>
@@ -820,7 +804,7 @@ input,textarea{font-size:16px}
    </div>
   </div>
  </div>
- <div class="center" style="margin-top:30px"><button class="btn primary" onclick="go(9)">After midnight →</button></div>
+ <div class="center" style="margin-top:30px"><button class="btn primary" onclick="go(8)">After midnight →</button></div>
 </div>
 </section>
 
@@ -831,7 +815,7 @@ input,textarea{font-size:16px}
  <div class="quote" style="font-size:clamp(35px,5vw,62px)">"Some conversations happen late at night because that's when people stop performing and simply become themselves."</div>
  <p class="body">Somewhere between the random stories, the long talks and the little things you shared, I got the feeling that there is a quieter, deeper Madam Ji underneath the very talkative one.</p>
  <p class="quote-small" style="color:#e3d9de">And honestly?<br>I think that version of you is beautiful too. ♡</p>
- <button class="btn primary" onclick="go(10)">Make a wish →</button>
+ <button class="btn primary" onclick="go(9)">Make a wish →</button>
 </div>
 </section>
 
@@ -850,10 +834,8 @@ input,textarea{font-size:16px}
  <div class="wish-reveal" id="wishReveal">
   <p class="quote-small" style="max-width:600px;margin:0 auto">Whatever you wished for — I hope it finds its way to you this year. And if it doesn't come on its own, I hope you go and build it yourself. You're good at building things.</p>
  </div>
- <div class="center" style="margin-top:35px"><button class="btn" onclick="go(11)">Last page →</button></div>
-</div>
+ </div>
 </section>
-
 <section class="page" id="p11">
 <div class="heart-fireworks" id="heartFireworks" aria-hidden="true"></div>
 <div class="content center final-card">
@@ -863,9 +845,8 @@ input,textarea{font-size:16px}
  <div class="line"></div>
  <p class="final-message">May this year bring you more peace, more laughter, more people who understand your heart, more reasons to smile — and a life that feels as beautiful as the one you keep imagining.</p>
  <div class="signature">Keep being you. ♡</div>
-
  <button class="btn primary" style="margin-top:25px" onclick="celebrate()">A little birthday surprise ✦</button>
- <div style="margin-top:18px"><button class="btn" onclick="go(12)">Continue →</button></div>
+ <div style="margin-top:18px"><button class="btn" onclick="go(11)">Continue →</button></div>
 </div>
 </section>
 
