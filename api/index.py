@@ -436,6 +436,15 @@ input,textarea{font-size:16px}
 .final-message{max-width:720px;margin:auto;font-family:"Cormorant Garamond";font-size:28px;line-height:1.45;color:#d7cdd2;position:relative;z-index:1}
 .signature{font-family:Parisienne;font-size:48px;margin-top:35px;color:#eee5e9;position:relative;z-index:1}
 
+/* birthday message */
+.birthday-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:rgba(8,4,9,.62);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+.birthday-modal.show{opacity:1;visibility:visible}
+.birthday-dialog{width:min(440px,92vw);padding:28px 28px 24px;border:1px solid rgba(255,255,255,.25);border-radius:24px;background:linear-gradient(145deg,rgba(51,30,44,.96),rgba(22,12,20,.98));box-shadow:0 25px 80px rgba(0,0,0,.5),inset 0 1px rgba(255,255,255,.2);text-align:left;transform:translateY(12px) scale(.97);transition:transform .3s ease}
+.birthday-modal.show .birthday-dialog{transform:translateY(0) scale(1)}
+.birthday-dialog h2{margin:0 0 18px;font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:600;color:#fff1f6}
+.birthday-dialog p{margin:0;color:#e4d9df;font-size:16px;line-height:1.65;white-space:pre-line}
+.birthday-dialog .btn{display:block;margin:22px 0 0 auto}
+
 /* progress */
 .progress{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:7px;padding:9px 13px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(10,9,13,.55);backdrop-filter:blur(14px);max-width:92vw;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .dot{flex:none}
@@ -875,6 +884,17 @@ input,textarea{font-size:16px}
 
 <div class="progress" id="progress"></div>
 
+<div class="birthday-modal" id="birthdayModal" role="dialog" aria-modal="true" aria-labelledby="birthdayModalTitle">
+ <div class="birthday-dialog">
+  <h2 id="birthdayModalTitle">Your well wisher says</h2>
+  <p>Happy Birthday, Pooja Daksh. ♡
+
+May Mahadev keep you happy, peaceful and protected.
+And may this year be exceptionally kind to you.</p>
+  <button class="btn primary" onclick="closeBirthdayMessage()">OK</button>
+ </div>
+</div>
+
 <script>
 const pages=[...document.querySelectorAll('.page')];
 const progress=document.getElementById('progress');
@@ -1051,7 +1071,10 @@ function celebrate(){
  burst(160);
  fireworks(3);
  chime(880);
- setTimeout(()=>alert('Happy Birthday, Pooja Daksh. ♡\\n\\nMay Mahadev keep you happy, peaceful and protected.\\nAnd may this year be exceptionally kind to you.'),700);
+ setTimeout(()=>document.getElementById('birthdayModal').classList.add('show'),700);
+}
+function closeBirthdayMessage(){
+ document.getElementById('birthdayModal').classList.remove('show');
 }
 
 /* ---- fireworks burst (DOM particles, no canvas needed) ---- */
