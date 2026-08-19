@@ -427,9 +427,6 @@ input,textarea{font-size:16px}
 }
 .final-message{max-width:720px;margin:auto;font-family:"Cormorant Garamond";font-size:28px;line-height:1.45;color:#d7cdd2;position:relative;z-index:1}
 .signature{font-family:Parisienne;font-size:48px;margin-top:35px;color:#eee5e9;position:relative;z-index:1}
-.voice-note{margin:30px auto 0;max-width:420px;border:1.5px solid rgba(255,255,255,.2);border-radius:20px;padding:18px 20px;background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.03) 100%);backdrop-filter:blur(20px);box-shadow:0 15px 50px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.15);position:relative;z-index:1}
-.voice-note .vn-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a79fa5;margin-bottom:10px}
-.voice-note audio{width:100%}
 
 /* progress */
 .progress{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:7px;padding:9px 13px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(10,9,13,.55);backdrop-filter:blur(14px);max-width:92vw;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -545,7 +542,6 @@ input,textarea{font-size:16px}
  .flip-back p{font-size:14px}
  .btn{padding:13px 20px;font-size:14px}
  .candle{width:22px;height:100px}
- .voice-note{padding:14px 16px}
  .hero-ring{display:none}
  .quote{font-size:clamp(22px,6.5vw,30px)}
 }
@@ -847,13 +843,6 @@ input,textarea{font-size:16px}
  <p class="final-message">May this year bring you more peace, more laughter, more people who understand your heart, more reasons to smile — and a life that feels as beautiful as the one you keep imagining.</p>
  <div class="signature">Keep being you. ♡</div>
 
- <div class="voice-note">
-  <div class="vn-label">A little voice note</div>
-  <audio controls id="voiceNote">
-   <source src="/static/audio/voice-note.mp3" type="audio/mpeg">
-  </audio>
- </div>
-
  <button class="btn primary" style="margin-top:25px" onclick="celebrate()">A little birthday surprise ✦</button>
  <div style="margin-top:18px"><button class="btn" onclick="go(12)">Continue →</button></div>
 </div>
@@ -976,7 +965,7 @@ const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').
 
 if(canHover && !prefersReducedMotion){
  /* 3D tilt effect for premium cards */
- const cardElements=[...document.querySelectorAll('.question-shell, .flip-card, .frame, .architecture, .voice-note')];
+ const cardElements=[...document.querySelectorAll('.question-shell, .flip-card, .frame, .architecture')];
  cardElements.forEach(card=>{
   card.addEventListener('mousemove',e=>{
    if(card.classList.contains('flip-card')){
