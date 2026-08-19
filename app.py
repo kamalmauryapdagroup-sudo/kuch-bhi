@@ -311,9 +311,9 @@ input,textarea{font-size:16px}
  transform:translateY(-8px) scale(1.02);
  box-shadow:0 40px 120px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.2),0 0 80px rgba(255,200,220,.15);
 }
-.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:filter .4s ease}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:filter .4s ease}
 .frame:hover img{filter:saturate(1.15) brightness(1.08)}
-.frame-inner{padding:30px;text-align:center;color:#a9a0a7;position:relative;z-index:2}
+.frame-inner{display:none}
 .frame-symbol{font-size:75px;opacity:.7;margin-bottom:10px}
 
 /* spiritual */
@@ -730,7 +730,6 @@ input,textarea{font-size:16px}
  </div>
  <div class="frame">
   <img src="{{ url_for('static', filename='photos/memory1.jpg') }}" alt="Madam Ji" onerror="this.style.display='none'">
-  <div class="frame-inner"><div class="frame-symbol">♡</div><div>One day, this space can hold<br>a photo that belongs here.</div><div style="margin-top:12px;font-size:11px;letter-spacing:2px">A MEMORY WAITING TO BE ADDED</div></div>
  </div>
  </div>
  <div class="center" style="margin-top:35px"><button class="btn primary" onclick="go(6)">There is something deeper →</button></div>
