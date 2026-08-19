@@ -822,9 +822,11 @@ input,textarea{font-size:16px}
  <div class="eyebrow">10 • MAKE A WISH</div>
  <div class="display" style="font-size:clamp(38px,6vw,64px)">One candle.<br>One wish.</div>
  <div class="candle-wrap">
-  <div class="smoke" id="smoke"></div>
-  <div class="flame" id="flame"></div>
-  <div class="candle"><div class="wick"></div></div>
+  <div class="candle">
+   <div class="smoke" id="smoke"></div>
+   <div class="flame" id="flame"></div>
+   <div class="wick"></div>
+  </div>
  </div>
  <button class="btn primary" id="blowBtn" onclick="blowCandle()">Blow out the candle 🕯️</button>
  <div class="wish-reveal" id="wishReveal">
