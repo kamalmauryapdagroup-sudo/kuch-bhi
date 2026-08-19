@@ -445,6 +445,25 @@ input,textarea{font-size:16px}
 .birthday-dialog p{margin:0;color:#e4d9df;font-size:16px;line-height:1.65;white-space:pre-line}
 .birthday-dialog .btn{display:block;margin:22px 0 0 auto}
 
+/* surprise envelope gate */
+.surprise-gate{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:24px;background:rgba(10,5,10,.52);backdrop-filter:blur(18px);transition:opacity .8s ease,visibility .8s ease}
+.surprise-gate.unlocked{opacity:0;visibility:hidden;pointer-events:none}
+.surprise-card{width:min(520px,94vw);position:relative;padding:34px 28px 30px;border:1px solid rgba(255,255,255,.25);border-radius:28px;background:linear-gradient(145deg,rgba(63,35,54,.94),rgba(22,11,20,.97));box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.2);text-align:center;overflow:hidden}
+.surprise-card:before,.surprise-card:after{content:'♡';position:absolute;color:#ffd5e5;font-size:32px;text-shadow:0 0 16px rgba(255,170,205,.85);animation:heartPop 3.2s ease-in-out infinite}
+.surprise-card:before{left:8%;top:13%;animation-delay:-1.2s}.surprise-card:after{right:8%;bottom:16%;font-size:25px;animation-delay:-2.3s}
+@keyframes heartPop{0%,100%{opacity:.25;transform:translateY(10px) scale(.7) rotate(-12deg)}50%{opacity:1;transform:translateY(-8px) scale(1.1) rotate(10deg)}}
+.bear{font-size:48px;line-height:1;margin-bottom:7px;animation:bearBounce 2.8s ease-in-out infinite}
+@keyframes bearBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+.envelope{width:min(285px,76vw);height:175px;margin:4px auto 24px;position:relative;border:1px solid rgba(255,255,255,.36);border-radius:12px;background:linear-gradient(145deg,#f8d6e3,#d997b6);box-shadow:0 18px 35px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.7);overflow:hidden;transform:rotate(-2deg)}
+.envelope:before{content:'';position:absolute;inset:0;background:linear-gradient(32deg,transparent 49%,rgba(117,47,76,.2) 50%,transparent 51%),linear-gradient(-32deg,transparent 49%,rgba(117,47,76,.16) 50%,transparent 51%)}
+.envelope-flap{position:absolute;inset:0 0 auto;height:112px;background:linear-gradient(145deg,#fbe4ec,#dca4bf);clip-path:polygon(0 0,100% 0,50% 82%);border-bottom:1px solid rgba(255,255,255,.35);z-index:2}
+.envelope-seal{position:absolute;z-index:3;left:50%;top:82px;transform:translateX(-50%);width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:#bd638c;color:#fff;font-size:22px;box-shadow:0 5px 14px rgba(85,26,56,.32)}
+.surprise-title{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,56px);font-weight:500;color:#fff1f6}.surprise-copy{margin:7px auto 22px;color:#d9cbd3;font-size:14px;line-height:1.7;max-width:350px}
+.surprise-form{display:grid;gap:11px;max-width:340px;margin:auto;text-align:left}.surprise-form label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cfc0c9}.surprise-form input{width:100%;padding:13px 15px;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(255,255,255,.08);color:#fff;font:inherit;outline:none;transition:border-color .25s,box-shadow .25s}.surprise-form input:focus{border-color:#f5c5d9;box-shadow:0 0 0 3px rgba(245,197,217,.12)}.surprise-form input::placeholder{color:#aa9aa4}.surprise-error{min-height:20px;margin:2px 0 0;color:#ffc2d8;font-size:13px;text-align:center}.surprise-form .btn{width:100%;margin-top:2px}
+#app,.progress,.music-toggle{visibility:hidden}.access-granted #app,.access-granted .progress,.access-granted .music-toggle{visibility:visible}
+@media(max-width:400px){.surprise-card{padding:26px 18px 24px}.envelope{height:145px}.envelope-flap{height:94px}.envelope-seal{top:69px}}
+@media(max-height:760px){.surprise-gate{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto}.surprise-card{margin:18px auto}}
+
 /* progress */
 .progress{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:7px;padding:9px 13px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(10,9,13,.55);backdrop-filter:blur(14px);max-width:92vw;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .dot{flex:none}
@@ -648,6 +667,23 @@ input,textarea{font-size:16px}
 <audio id="bgMusic" loop preload="none">
   <source src="/static/music/bg-music.mp3" type="audio/mpeg">
 </audio>
+
+<section class="surprise-gate" id="surpriseGate" aria-labelledby="surpriseTitle">
+ <div class="surprise-card">
+  <div class="bear" aria-hidden="true">🧸</div>
+  <div class="envelope" aria-hidden="true"><div class="envelope-flap"></div><div class="envelope-seal">♡</div></div>
+  <h1 class="surprise-title" id="surpriseTitle">A little surprise for you</h1>
+  <p class="surprise-copy">This envelope is sealed with love. Tell me who you are to open your special day.</p>
+  <form class="surprise-form" id="surpriseForm" onsubmit="unlockSurprise(event)">
+   <label for="guestName">Your name</label>
+   <input id="guestName" name="guestName" type="text" autocomplete="name" placeholder="Enter your name" required>
+   <label for="guestBirthday">Your birthday</label>
+   <input id="guestBirthday" name="guestBirthday" type="text" inputmode="numeric" placeholder="DD.MM.YYYY" required>
+   <div class="surprise-error" id="surpriseError" role="alert" aria-live="polite"></div>
+   <button class="btn primary" type="submit">Open the envelope <span class="arrow">♡</span></button>
+  </form>
+ </div>
+</section>
 
 <main id="app">
 
@@ -878,6 +914,23 @@ And may this year be exceptionally kind to you.</p>
 </div>
 
 <script>
+const surpriseGate=document.getElementById('surpriseGate');
+const surpriseError=document.getElementById('surpriseError');
+function unlockSurprise(event){
+ event.preventDefault();
+ const name=document.getElementById('guestName').value.trim().replace(/\\s+/g,' ').toLowerCase();
+ const birthday=document.getElementById('guestBirthday').value.trim().replace(/[\\/-]/g,'.');
+ if(name!=='pooja daksh' || birthday!=='20.08.2026'){
+  surpriseError.textContent='That envelope is waiting for Pooja Daksh. Try again, sweetheart. ♡';
+  document.getElementById('guestBirthday').focus();
+  return;
+ }
+ document.body.classList.add('access-granted');
+ surpriseGate.classList.add('unlocked');
+ chime(784);
+ setTimeout(()=>surpriseGate.remove(),850);
+}
+
 const pages=[...document.querySelectorAll('.page')];
 const progress=document.getElementById('progress');
 let current=0,locked=false;
