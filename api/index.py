@@ -886,7 +886,7 @@ input,textarea{font-size:16px}
 
 <div class="birthday-modal" id="birthdayModal" role="dialog" aria-modal="true" aria-labelledby="birthdayModalTitle">
  <div class="birthday-dialog">
-  <h2 id="birthdayModalTitle">Your well wisher says</h2>
+  <h2 id="birthdayModalTitle">Kamal says</h2>
   <p>Happy Birthday, Pooja Daksh. ♡
 
 May Mahadev keep you happy, peaceful and protected.
